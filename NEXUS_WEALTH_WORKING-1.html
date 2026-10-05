@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080808">
+<title>NEXUS WEALTH — Finance Command Center</title>
+<style>
+:root{--bg:#070707;--panel:#101010;--panel2:#151515;--line:#292929;--gold:#d7ad4a;--gold2:#f0cf72;--text:#f4f2ed;--muted:#99958c;--red:#ff6b6b;--green:#72d99a;--blue:#72a8ff;--shadow:0 16px 45px rgba(0,0,0,.38)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -10%,#30240b 0,#0b0b0b 30%,#070707 65%);color:var(--text);font:14px Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+.app{display:flex;min-height:100vh}.side{width:245px;background:#0a0a0a;border-right:1px solid var(--line);padding:22px 16px;position:fixed;inset:0 auto 0 0;z-index:5}.brand{font-weight:900;letter-spacing:2px;font-size:19px}.brand span{color:var(--gold)}.tag{color:var(--muted);font-size:11px;margin:6px 0 28px}.nav{display:grid;gap:6px}.nav button{background:none;border:0;color:#aaa;text-align:left;padding:12px;border-radius:10px}.nav button.active,.nav button:hover{background:#17130a;color:var(--gold2)}.sidefoot{position:absolute;bottom:18px;color:#666;font-size:11px}
+.main{margin-left:245px;width:calc(100% - 245px);padding:28px;max-width:1500px}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:22px}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:2px;text-transform:uppercase}.title{font-size:28px;font-weight:800;margin:4px 0}.sub{color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#111;color:#ddd;padding:10px 13px;border-radius:10px}.btn.gold{background:linear-gradient(135deg,#c99c36,#efd072);color:#15110a;border:0;font-weight:800}.btn.danger{color:#ff9a9a}.grid{display:grid;gap:14px}.kpis{grid-template-columns:2fr repeat(3,1fr)}.card{background:linear-gradient(145deg,#111,#0c0c0c);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.kpi .label{color:var(--muted);font-size:12px}.kpi .value{font-size:25px;font-weight:850;margin:9px 0}.goldline{height:3px;background:linear-gradient(90deg,var(--gold),transparent);border-radius:4px;margin:15px 0}.delta{font-size:12px}.up{color:var(--green)}.down{color:var(--red)}.mid{grid-template-columns:1.6fr 1fr}.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.section{margin-top:14px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.sectionhead h2{font-size:16px;margin:0}.muted{color:var(--muted)}.canvas{width:100%;height:245px;display:block}.bars{display:flex;align-items:end;gap:10px;height:190px;padding:10px 4px}.barwrap{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:6px}.bar{width:100%;max-width:42px;border-radius:7px 7px 2px 2px;background:linear-gradient(#e8c35e,#8e6920);min-height:3px}.barlabel{font-size:10px;color:#777}.donut{width:165px;height:165px;border-radius:50%;margin:4px auto;background:conic-gradient(var(--gold) 0 38%,#6d5a2d 38% 59%,#8b8b8b 59% 76%,#454545 76% 88%,#272727 88% 100%);position:relative}.donut:after{content:"";position:absolute;inset:35px;background:#0e0e0e;border-radius:50%;box-shadow:inset 0 0 0 1px #252525}.legend{display:grid;gap:7px;margin-top:12px}.legend div{display:flex;justify-content:space-between;color:#aaa;font-size:12px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-right:7px}.accounts{grid-template-columns:repeat(4,1fr)}.acct{min-height:145px}.acct .name{font-weight:750}.acct .bal{font-size:22px;font-weight:850;margin:17px 0 6px}.pill{display:inline-block;border:1px solid #343434;padding:4px 7px;border-radius:999px;font-size:10px;color:#aaa}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:650px}.table th,.table td{text-align:left;padding:11px 9px;border-bottom:1px solid #222}.table th{color:#777;font-size:11px;text-transform:uppercase}.income{color:var(--green)}.expense{color:#ff8c8c}.transfer{color:var(--blue)}.empty{text-align:center;color:#777;padding:35px}.page{display:none}.page.active{display:block}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:grid;gap:6px}.field label{font-size:11px;color:#888}.field input,.field select{width:100%;background:#0b0b0b;border:1px solid #2b2b2b;color:#eee;padding:11px;border-radius:9px;outline:none}.field input:focus,.field select:focus{border-color:#9d7a31}.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;z-index:20;padding:15px}.modal.show{display:flex}.modalbox{width:min(600px,100%);background:#101010;border:1px solid #3b321d;border-radius:17px;padding:20px;max-height:90vh;overflow:auto}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.toast{position:fixed;right:18px;bottom:18px;background:#151515;border:1px solid #51411e;color:#eee;padding:12px 15px;border-radius:10px;display:none;z-index:30}.toast.show{display:block}.mobilebar{display:none}.progress{height:8px;background:#262626;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#9b7629,#f1ce6c);border-radius:20px}.score{font-size:46px;font-weight:900;color:var(--gold2)}.notice{border-left:3px solid var(--gold);background:#151209;padding:12px;border-radius:8px;color:#cfc8b6;margin-bottom:9px}.small{font-size:11px}.search{max-width:330px}.hidden{display:none!important}
+@media(max-width:1000px){.side{width:210px}.main{margin-left:210px;width:calc(100% - 210px);padding:20px}.kpis{grid-template-columns:1fr 1fr}.kpis .kpi:first-child{grid-column:1/-1}.accounts{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.app{display:block}.side{display:none}.main{margin:0;width:100%;padding:15px 13px 85px}.top{align-items:flex-start}.title{font-size:23px}.top .actions .btn:not(.gold){display:none}.mid,.two,.three{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.kpis .kpi:first-child{grid-column:1/-1}.accounts{grid-template-columns:1fr 1fr}.acct{min-height:130px}.mobilebar{display:flex;position:fixed;bottom:0;left:0;right:0;height:65px;background:#0c0c0c;border-top:1px solid #292929;z-index:10;justify-content:space-around}.mobilebar button{background:none;border:0;color:#888;font-size:10px}.mobilebar button.active{color:var(--gold2)}.mobilebar b{display:block;font-size:18px;margin-bottom:2px}.formgrid{grid-template-columns:1fr}.table{min-width:720px}.search{max-width:100%}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand">NEXUS <span>WEALTH</span></div>
+  <div class="tag">PRIVATE FINANCE COMMAND CENTER</div>
+  <nav class="nav">
+    <button data-page="dashboard" class="active">◈ Dashboard</button>
+    <button data-page="accounts">▣ Accounts</button>
+    <button data-page="transactions">↕ Transactions</button>
+    <button data-page="networth">◇ Net Worth</button>
+    <button data-page="budget">▤ Budget</button>
+    <button data-page="debt">△ Debt</button>
+    <button data-page="insights">✦ Insights</button>
+    <button data-page="settings">⚙ Settings</button>
+  </nav>
+  <div class="sidefoot">Local-first • INR ₹ • v1.0</div>
+</aside>
+<main class="main">
+  <div class="top">
+    <div><div class="eyebrow">Financial Command Center</div><div class="title">NEXUS WEALTH</div><div class="sub">Your money. One system. Total clarity.</div></div>
+    <div class="actions"><button class="btn" onclick="exportJSON()">Export</button><button class="btn" onclick="document.getElementById('csv').click()">Import CSV</button><input id="csv" type="file" accept=".csv,.txt" class="hidden" onchange="importCSV(this.files[0])"><button class="btn gold" onclick="openTx()">＋ Transaction</button></div>
+  </div>
+
+  <section id="dashboard" class="page active">
+    <div class="grid kpis">
+      <div class="card kpi"><div class="label">TOTAL NET WORTH</div><div class="value" id="netWorth">₹0</div><div id="nwDelta" class="delta muted">Add assets & liabilities to begin</div><div class="goldline"></div><div class="small muted">Assets − Liabilities</div></div>
+      <div class="card kpi"><div class="label">TOTAL ASSETS</div><div class="value" id="assets">₹0</div><div class="small muted">Bank + cash + investments</div></div>
+      <div class="card kpi"><div class="label">LIABILITIES</div><div class="value" id="liabilities">₹0</div><div class="small muted">Loans + outstanding debt</div></div>
+      <div class="card kpi"><div class="label">THIS MONTH SAVINGS</div><div class="value" id="savings">₹0</div><div class="small muted">Income − expenses</div></div>
+    </div>
+    <div class="grid mid section">
+      <div class="card"><div class="sectionhead"><h2>Cash Flow</h2><span class="pill" id="monthLabel"></span></div><canvas id="cashflow" class="canvas"></canvas></div>
+      <div class="card"><div class="sectionhead"><h2>Spending Mix</h2></div><div id="donut" class="donut"></div><div id="legend" class="legend"></div></div>
+    </div>
+    <div class="grid accounts section" id="dashAccounts"></div>
+    <div class="grid two section">
+      <div class="card"><div class="sectionhead"><h2>Monthly Expenses</h2></div><div id="expenseBars" class="bars"></div></div>
+      <div class="card"><div class="sectionhead"><h2>Financial Health</h2></div><div class="score" id="healthScore">0</div><div class="muted small">/ 100</div><div class="goldline"></div><div id="healthText" class="muted">Add transaction data to calculate your score.</div></div>
+    </div>
+    <div class="card section"><div class="sectionhead"><h2>Recent Transactions</h2><button class="btn" onclick="go('transactions')">View all</button></div><div id="recent"></div></div>
+  </section>
+
+  <section id="accounts" class="page">
+    <div class="card"><div class="sectionhead"><h2>Accounts</h2><button class="btn gold" onclick="openAccount()">＋ Add Account</button></div><div id="accountGrid" class="grid accounts"></div></div>
+  </section>
+
+  <section id="transactions" class="page">
+    <div class="card"><div class="sectionhead"><h2>Transactions</h2><button class="btn gold" onclick="openTx()">＋ Add Transaction</button></div>
+      <div class="actions" style="margin-bottom:12px"><input class="field input search" id="txSearch" placeholder="Search description…" oninput="renderTransactions()"><select id="txFilter" onchange="renderTransactions()" style="background:#0b0b0b;color:#ddd;border:1px solid #2b2b2b;border-radius:9px;padding:10px"><option value="">All types</option><option value="income">Income</option><option value="expense">Expense</option><option value="transfer">Transfer</option></select></div>
+      <div id="txTable" class="tablewrap"></div>
+    </div>
+  </section>
+
+  <section id="networth" class="page">
+    <div class="grid two">
+      <div class="card"><div class="eyebrow">Current Position</div><div class="title" id="nwBig">₹0</div><div class="muted">Total net worth</div><div class="goldline"></div><div id="nwBreakdown"></div></div>
+      <div class="card"><div class="sectionhead"><h2>Position Notes</h2></div><div class="notice">Net worth is calculated from account balances + other assets − debts.</div><div class="notice">Transfers between your own accounts do not count as income or expense.</div></div>
+    </div>
+    <div class="card section"><div class="sectionhead"><h2>Net Worth Components</h2></div><div id="nwAccounts"></div></div>
+  </section>
+
+  <section id="budget" class="page">
+    <div class="card"><div class="sectionhead"><h2>Monthly Budget</h2><button class="btn gold" onclick="openBudget()">＋ Set Budget</button></div><div id="budgetList"></div></div>
+  </section>
+
+  <section id="debt" class="page">
+    <div class="card"><div class="sectionhead"><h2>Debt Manager</h2><button class="btn gold" onclick="openDebt()">＋ Add Debt</button></div><div id="debtList"></div></div>
+  </section>
+
+  <section id="insights" class="page">
+    <div class="grid three" id="insightCards"></div>
+    <div class="card section"><h2>Smart Insights</h2><div id="insightsList"></div></div>
+  </section>
+
+  <section id="settings" class="page">
+    <div class="grid two">
+      <div class="card"><h2>Data</h2><p class="muted">Everything is stored locally in this browser in v1. No bank passwords, OTPs or credentials are requested.</p><div class="actions"><button class="btn" onclick="exportJSON()">Export JSON</button><button class="btn" onclick="document.getElementById('csv').click()">Import CSV</button><button class="btn danger" onclick="resetAll()">Reset all data</button></div></div>
+      <div class="card"><h2>System</h2><div class="notice">Currency: INR ₹</div><div class="notice">Architecture: local-first MVP</div><div class="notice">Bank API connection can be added later through a regulated open-banking provider.</div></div>
+    </div>
+  </section>
+</main>
+</div>
+<div class="mobilebar">
+<button data-page="dashboard" class="active"><b>◈</b>Home</button><button data-page="accounts"><b>▣</b>Accounts</button><button data-page="transactions"><b>↕</b>Tx</button><button data-page="networth"><b>◇</b>Wealth</button><button data-page="insights"><b>✦</b>Insights</button>
+</div>
+
+<div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div class="modalbox" id="modalbox"></div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY='nexus_wealth_v1';
+let db=JSON.parse(localStorage.getItem(KEY)||'null')||{accounts:[],transactions:[],debts:[],budgets:[]};
+const cats=['Salary','Business','Freelance','Investment','Rent','Food','Transport','Shopping','Bills','EMI','Loan','Subscription','Entertainment','Health','Education','Other'];
+const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(Number(n)||0);
+const save=()=>{localStorage.setItem(KEY,JSON.stringify(db));renderAll()};
+const id=()=>Date.now()+Math.random().toString(16).slice(2);
+function toast(s){let x=document.getElementById('toast');x.textContent=s;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2200)}
+function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===p));renderAll()}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>go(b.dataset.page));
+
+function openModal(html){document.getElementById('modalbox').innerHTML=html;document.getElementById('modal').classList.add('show')}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+
+function openAccount(){
+openModal(`<div class="modalhead"><h2>Add Account</h2><button class="btn" onclick="closeModal()">×</button></div>
+<div class="formgrid">
+<div class="field"><label>Account name</label><input id="aName" placeholder="e.g. Salary Account"></div>
+<div class="field"><label>Provider / bank</label><input id="aBank" placeholder="e.g. HDFC"></div>
+<div class="field"><label>Account type</label><select id="aType"><option>Bank</option><option>Cash</option><option>Investment</option><option>Other</option></select></div>
+<div class="field"><label>Current balance</label><input id="aBal" type="number" placeholder="0"></div></div>
+<div class="actions" style="margin-top:15px"><button class="btn gold" onclick="addAccount()">Save account</button></div>`)
+}
+function addAccount(){let name=document.getElementById('aName').value.trim();if(!name)return toast('Enter account name');db.accounts.push({id:id(),name,bank:document.getElementById('aBank').value.trim(),type:document.getElementById('aType').value,balance:+document.getElementById('aBal').value||0});closeModal();save();toast('Account added')}
+function deleteAccount(i){if(confirm('Delete this account? Transactions remain stored.')){db.accounts.splice(i,1);save()}}
+
+function openTx(){
+let opts=db.accounts.map(a=>`<option value="${a.id}">${a.name}</option>`).join('');
+openModal(`<div class="modalhead"><h2>Add Transaction</h2><button class="btn" onclick="closeModal()">×</button></div>
+<div class="formgrid">
+<div class="field"><label>Date</label><input id="tDate" type="date" value="${new Date().toISOString().slice(0,10)}"></div>
+<div class="field"><label>Type</label><select id="tType" onchange="toggleTransfer()"><option value="expense">Expense</option><option value="income">Income</option><option value="transfer">Transfer</option></select></div>
+<div class="field"><label>Description</label><input id="tDesc" placeholder="e.g. Salary / Grocery"></div>
+<div class="field"><label>Amount</label><input id="tAmt" type="number" min="0" placeholder="0"></div>
+<div class="field"><label>Account</label><select id="tAcc">${opts||'<option value="">Add an account first</option>'}</select></div>
+<div class="field" id="toWrap" style="display:none"><label>Transfer to</label><select id="tTo">${opts}</select></div>
+<div class="field"><label>Category</label><select id="tCat">${cats.map(x=>`<option>${x}</option>`).join('')}</select></div>
+<div class="field"><label>Note</label><input id="tNote" placeholder="Optional"></div>
+</div><div class="actions" style="margin-top:15px"><button class="btn gold" onclick="addTx()">Save transaction</button></div>`)
+}
+function toggleTransfer(){document.getElementById('toWrap').style.display=document.getElementById('tType').value==='transfer'?'grid':'none'}
+function addTx(){let type=document.getElementById('tType').value,amt=+document.getElementById('tAmt').value||0,acc=document.getElementById('tAcc').value;if(!acc||amt<=0)return toast('Select account and amount');if(type==='transfer'&&acc===document.getElementById('tTo').value)return toast('Choose a different destination');db.transactions.push({id:id(),date:document.getElementById('tDate').value,type,desc:document.getElementById('tDesc').value||'Untitled',amount:amt,account:acc,to:type==='transfer'?document.getElementById('tTo').value:null,category:type==='transfer'?'Transfer':document.getElementById('tCat').value,note:document.getElementById('tNote').value});closeModal();save();toast('Transaction saved')}
+
+function delTx(i){if(confirm('Delete transaction?')){db.transactions.splice(i,1);save()}}
+function renderTransactions(){
+let q=(document.getElementById('txSearch')?.value||'').toLowerCase(), f=document.getElementById('txFilter')?.value||'';
+let rows=db.transactions.slice().sort((a,b)=>b.date.localeCompare(a.date)).filter(t=>(!q||t.desc.toLowerCase().includes(q)||t.category.toLowerCase().includes(q))&&(!f||t.type===f));
+let names=Object.fromEntries(db.accounts.map(a=>[a.id,a.name]));
+document.getElementById('txTable').innerHTML=rows.length?`<table class="table"><thead><tr><th>Date</th><th>Description</th><th>Account</th><th>Category</th><th>Type</th><th>Amount</th><th></th></tr></thead><tbody>${rows.map(t=>{let idx=db.transactions.indexOf(t);return `<tr><td>${t.date}</td><td><b>${esc(t.desc)}</b><div class="small muted">${esc(t.note||'')}</div></td><td>${esc(names[t.account]||'—')}</td><td>${esc(t.category)}</td><td class="${t.type}">${t.type}</td><td class="${t.type==='income'?'income':t.type==='expense'?'expense':'transfer'}">${t.type==='income'?'+':t.type==='expense'?'-':'↔'} ${money(t.amount)}</td><td><button class="btn" onclick="delTx(${idx})">Delete</button></td></tr>`}).join('')}</tbody></table>`:'<div class="empty">No transactions yet.</div>'
+}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+
+function balances(){
+let b=Object.fromEntries(db.accounts.map(a=>[a.id,+a.balance||0]));
+for(let t of db.transactions){let a=t.account;if(!(a in b))continue;if(t.type==='income')b[a]+=t.amount;if(t.type==='expense')b[a]-=t.amount;if(t.type==='transfer'){b[a]-=t.amount;if(t.to&&t.to in b)b[t.to]+=t.amount}}
+return b
+}
+function totals(){
+let b=balances(), assets=Object.values(b).reduce((a,x)=>a+x,0), debts=db.debts.reduce((a,d)=>a+(+d.remaining||0),0);
+let now=new Date(), ym=now.toISOString().slice(0,7), inc=0,exp=0;
+db.transactions.forEach(t=>{if(t.date.startsWith(ym)){if(t.type==='income')inc+=t.amount;if(t.type==='expense')exp+=t.amount}});
+return {b,assets,debts,nw:assets-debts,inc,exp,sav:inc-exp}
+}
+function renderAll(){renderDash();renderTransactions();renderAccounts();renderNW();renderBudget();renderDebt();renderInsights()}
+function renderDash(){
+let x=totals();netWorth.textContent=money(x.nw);assets.textContent=money(x.assets);liabilities.textContent=money(x.debts);savings.textContent=money(x.sav);nwBig.textContent=money(x.nw);monthLabel.textContent=new Date().toLocaleString('en-IN',{month:'long',year:'numeric'});
+let s=x.sav>=0?'up':'down';nwDelta.className='delta '+s;nwDelta.textContent=x.sav>=0?`Cash flow ${money(x.sav)} this month`:`Cash flow ${money(Math.abs(x.sav))} deficit this month`;
+document.getElementById('dashAccounts').innerHTML=db.accounts.map((a,i)=>`<div class="card acct"><div class="name">${esc(a.name)}</div><span class="pill">${esc(a.bank||a.type)}</span><div class="bal">${money(x.b[a.id]||0)}</div><div class="small muted">${a.type} • <button class="btn" style="padding:3px 6px" onclick="deleteAccount(${i})">remove</button></div></div>`).join('')||'<div class="card empty">Add your accounts to begin.</div>';
+drawCashflow();renderSpending();renderRecent();renderHealth()
+}
+function drawCashflow(){
+let c=document.getElementById('cashflow'),d=c.getContext('2d'),w=c.clientWidth,h=c.clientHeight,ratio=devicePixelRatio||1;c.width=w*ratio;c.height=h*ratio;d.setTransform(ratio,0,0,ratio,0,0);d.clearRect(0,0,w,h);
+let now=new Date(), days=new Date(now.getFullYear(),now.getMonth()+1,0).getDate(), inc=Array(days).fill(0),exp=Array(days).fill(0);
+db.transactions.forEach(t=>{let dt=new Date(t.date);if(dt.getFullYear()===now.getFullYear()&&dt.getMonth()===now.getMonth()){let n=dt.getDate()-1;if(t.type==='income')inc[n]+=t.amount;if(t.type==='expense')exp[n]+=t.amount}});
+let max=Math.max(1,...inc,...exp),pad=24;d.strokeStyle='#272727';d.lineWidth=1;d.beginPath();d.moveTo(pad,10);d.lineTo(pad,h-25);d.lineTo(w-8,h-25);d.stroke();
+function line(arr,stroke){d.strokeStyle=stroke;d.lineWidth=2;d.beginPath();arr.forEach((v,i)=>{let x=pad+(i/(days-1))*(w-pad-12),y=(h-28)-(v/max)*(h-48);i?d.lineTo(x,y):d.moveTo(x,y)});d.stroke()}
+line(inc,'#e4bf5b');line(exp,'#777');
+d.fillStyle='#888';d.font='10px system-ui';d.fillText('Income',pad,15);d.fillText('Expense',pad+55,15)
+}
+function renderSpending(){
+let totals={};db.transactions.filter(t=>t.type==='expense'&&t.date.startsWith(new Date().toISOString().slice(0,7))).forEach(t=>totals[t.category]=(totals[t.category]||0)+t.amount);let arr=Object.entries(totals).sort((a,b)=>b[1]-a[1]);let sum=arr.reduce((a,x)=>a+x[1],0);
+let colors=['#d7ad4a','#80672e','#8b8b8b','#555','#333'];let acc=0,stops=[];arr.slice(0,5).forEach((x,i)=>{let p=sum?x[1]/sum*100:0;stops.push(`${colors[i]} ${acc}% ${acc+p}%`);acc+=p});document.getElementById('donut').style.background=`conic-gradient(${stops.length?stops.join(','):'#2b2b2b 0 100%'})`;
+document.getElementById('legend').innerHTML=arr.slice(0,5).map((x,i)=>`<div><span><i class="dot" style="background:${colors[i]}"></i>${esc(x[0])}</span><b>${money(x[1])}</b></div>`).join('')||'<div class="muted">No expenses this month.</div>';
+let max=Math.max(1,...arr.map(x=>x[1]));document.getElementById('expenseBars').innerHTML=arr.slice(0,8).map(x=>`<div class="barwrap"><div class="bar" style="height:${Math.max(3,x[1]/max*150)}px"></div><div class="barlabel">${esc(x[0]).slice(0,9)}</div></div>`).join('')||'<div class="empty">No data</div>'
+}
+function renderRecent(){let names=Object.fromEntries(db.accounts.map(a=>[a.id,a.name]));let rows=db.transactions.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,6);document.getElementById('recent').innerHTML=rows.length?`<table class="table"><thead><tr><th>Date</th><th>Description</th><th>Account</th><th>Amount</th></tr></thead><tbody>${rows.map(t=>`<tr><td>${t.date}</td><td>${esc(t.desc)}</td><td>${esc(names[t.account]||'—')}</td><td class="${t.type==='income'?'income':t.type==='expense'?'expense':'transfer'}">${t.type==='income'?'+':t.type==='expense'?'-':'↔'} ${money(t.amount)}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">Your recent transactions will appear here.</div>'}
+function renderHealth(){let x=totals(),score=50;if(x.inc>0){let rate=x.sav/x.inc;score=40+Math.max(-20,Math.min(35,rate*100));if(x.debts===0)score+=15;else if(x.debts<x.assets*.25)score+=8}score=Math.round(Math.max(0,Math.min(100,score)));document.getElementById('healthScore').textContent=score;document.getElementById('healthText').textContent=score>=80?'Strong financial position. Keep building assets.':score>=60?'Healthy base. Focus on savings and debt control.':'Needs attention. Prioritize cash flow and high-cost debt.'}
+function renderAccounts(){let x=totals();document.getElementById('accountGrid').innerHTML=db.accounts.map((a,i)=>`<div class="card acct"><div class="name">${esc(a.name)}</div><span class="pill">${esc(a.bank||a.type)}</span><div class="bal">${money(x.b[a.id]||0)}</div><div class="small muted">${esc(a.type)}</div><button class="btn" style="margin-top:10px" onclick="deleteAccount(${i})">Delete</button></div>`).join('')||'<div class="empty">No accounts. Add your first account.</div>'}
+function renderNW(){let x=totals();document.getElementById('nwBreakdown').innerHTML=`<div class="grid two"><div><div class="muted small">ASSETS</div><b>${money(x.assets)}</b></div><div><div class="muted small">LIABILITIES</div><b>${money(x.debts)}</b></div></div>`;document.getElementById('nwAccounts').innerHTML=db.accounts.map(a=>`<div style="margin:12px 0"><div class="sectionhead"><span>${esc(a.name)}</span><b>${money(x.b[a.id]||0)}</b></div><div class="progress"><i style="width:${x.assets?Math.max(0,(x.b[a.id]||0)/Math.max(x.assets,1)*100):0}%"></i></div></div>`).join('')||'<div class="empty">No accounts yet.</div>'}
+function openBudget(){openModal(`<div class="modalhead"><h2>Set Monthly Budget</h2><button class="btn" onclick="closeModal()">×</button></div><div class="formgrid"><div class="field"><label>Category</label><select id="bCat">${cats.filter(x=>!['Salary','Business','Freelance','Investment'].includes(x)).map(x=>`<option>${x}</option>`).join('')}</select></div><div class="field"><label>Amount</label><input id="bAmt" type="number"></div></div><div class="actions" style="margin-top:15px"><button class="btn gold" onclick="addBudget()">Save</button></div>`)}
+function addBudget(){db.budgets=db.budgets.filter(x=>x.category!==document.getElementById('bCat').value);db.budgets.push({category:document.getElementById('bCat').value,amount:+document.getElementById('bAmt').value||0});closeModal();save();toast('Budget saved')}
+function renderBudget(){let ym=new Date().toISOString().slice(0,7);let spent={};db.transactions.filter(t=>t.type==='expense'&&t.date.startsWith(ym)).forEach(t=>spent[t.category]=(spent[t.category]||0)+t.amount);document.getElementById('budgetList').innerHTML=db.budgets.map((b,i)=>{let s=spent[b.category]||0,p=b.amount?Math.min(100,s/b.amount*100):0;return `<div style="margin:16px 0"><div class="sectionhead"><span><b>${esc(b.category)}</b><span class="muted"> ${money(s)} / ${money(b.amount)}</span></span><button class="btn" onclick="db.budgets.splice(${i},1);save()">×</button></div><div class="progress"><i style="width:${p}%"></i></div></div>`}).join('')||'<div class="empty">Set a budget to start tracking spending.</div>'}
+function openDebt(){openModal(`<div class="modalhead"><h2>Add Debt</h2><button class="btn" onclick="closeModal()">×</button></div><div class="formgrid"><div class="field"><label>Name</label><input id="dName" placeholder="Personal Loan"></div><div class="field"><label>Remaining amount</label><input id="dRem" type="number"></div><div class="field"><label>Monthly EMI</label><input id="dEmi" type="number"></div><div class="field"><label>Interest rate %</label><input id="dRate" type="number" step=".01"></div><div class="field"><label>Due day</label><input id="dDue" type="number" min="1" max="31"></div></div><div class="actions" style="margin-top:15px"><button class="btn gold" onclick="addDebt()">Save debt</button></div>`)}
+function addDebt(){db.debts.push({id:id(),name:document.getElementById('dName').value,remaining:+document.getElementById('dRem').value||0,emi:+document.getElementById('dEmi').value||0,rate:+document.getElementById('dRate').value||0,due:+document.getElementById('dDue').value||0});closeModal();save();toast('Debt added')}
+function renderDebt(){let total=db.debts.reduce((a,d)=>a+d.remaining,0),emi=db.debts.reduce((a,d)=>a+d.emi,0);document.getElementById('debtList').innerHTML=db.debts.length?`<div class="grid two" style="margin-bottom:15px"><div><span class="muted small">TOTAL DEBT</span><h2>${money(total)}</h2></div><div><span class="muted small">MONTHLY EMI</span><h2>${money(emi)}</h2></div></div>${db.debts.map((d,i)=>`<div class="card" style="margin:10px 0"><div class="sectionhead"><h3>${esc(d.name)}</h3><button class="btn" onclick="db.debts.splice(${i},1);save()">Delete</button></div><div class="grid three"><div><span class="muted small">Remaining</span><b>${money(d.remaining)}</b></div><div><span class="muted small">EMI</span><b>${money(d.emi)}</b></div><div><span class="muted small">Rate</span><b>${d.rate}%</b></div></div></div>`).join(''):'<div class="empty">No debts added.</div>'}
+function renderInsights(){let x=totals(),ym=new Date().toISOString().slice(0,7),ex=db.transactions.filter(t=>t.type==='expense'&&t.date.startsWith(ym));let by={};ex.forEach(t=>by[t.category]=(by[t.category]||0)+t.amount);let top=Object.entries(by).sort((a,b)=>b[1]-a[1])[0];let cards=[['Savings rate',x.inc?Math.round(x.sav/x.inc*100)+'%':'—'],['Top category',top?top[0]:'—'],['Transactions',String(db.transactions.length)]];document.getElementById('insightCards').innerHTML=cards.map(c=>`<div class="card"><div class="muted small">${c[0].toUpperCase()}</div><div class="title" style="margin-top:10px">${esc(c[1])}</div></div>`).join('');let list=[];if(x.sav<0)list.push('Your current month cash flow is negative. Review discretionary expenses first.');if(top)list.push(`${top[0]} is your largest spending category this month at ${money(top[1])}.`);if(db.debts.length)list.push(`You have ${db.debts.length} active debt item(s) totaling ${money(x.debts)}.`);if(!list.length)list.push('Add more transaction data to unlock deeper insights.');document.getElementById('insightsList').innerHTML=list.map(s=>`<div class="notice">${esc(s)}</div>`).join('')}
+function exportJSON(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nexus-wealth-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function importCSV(file){if(!file)return;let r=new FileReader();r.onload=()=>{let lines=r.result.split(/\r?\n/).filter(Boolean);if(lines.length<2)return toast('CSV appears empty');let h=lines[0].split(',').map(x=>x.trim().toLowerCase());let find=(names)=>h.findIndex(x=>names.includes(x));let di=find(['date','transaction date']);let de=find(['description','narration','details']);let ai=find(['amount','value']);let ty=find(['type','transaction type']);let ca=find(['category']);let ac=find(['account','account name']);let imported=0;lines.slice(1).forEach(line=>{let v=line.split(',').map(x=>x.trim().replace(/^"|"$/g,''));let amt=parseFloat((v[ai]||'').replace(/[₹,]/g,''));if(!v[di]||!amt)return;let type=(v[ty]||'expense').toLowerCase().includes('credit')||((v[ty]||'').toLowerCase()==='income')?'income':'expense';let account=db.accounts.find(a=>a.name.toLowerCase()===(v[ac]||'').toLowerCase());if(!account&&db.accounts.length)account=db.accounts[0];db.transactions.push({id:id(),date:v[di],type,desc:v[de]||'Imported transaction',amount:Math.abs(amt),account:account?.id||'',to:null,category:v[ca]||'Other',note:'CSV import'});imported++});save();toast(`${imported} transactions imported`)};r.readAsText(file)}
+function resetAll(){if(confirm('Delete ALL NEXUS WEALTH data from this browser?')){localStorage.removeItem(KEY);location.reload()}}
+renderAll();
+</script>
+</body></html>
